@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(255, 255, 255) max-width: 800px;
+    max-width: 100;
+}
+
+p {
+    width: 1000px;
+    font-size: 18px;
+    font-family: Verdana, sans-serif;
+}
+
+h2 {
+    color: rgb(3, 109, 135);
+}
+
+.highlighted {
+    background-color: aquamarine;
+    font-weight: bold;
+}
