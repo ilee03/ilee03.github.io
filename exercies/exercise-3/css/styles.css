@@ -1,0 +1,105 @@
+/* This is how to comment in css */
+
+@font-face {
+    font-family:'Absans';
+    src: url('../fonts/Absans-Regular.woff2');
+}
+@font-face {
+    font-family:'SpratVF';
+    src: url('../fonts/SpratVF.woff2');
+}
+/* -------------------
+Base Styles
+---------------------*/
+
+body {
+    background-color:peachpuff; 
+    max-width: 1000px;
+    margin: auto;
+    font-family: 'Absans', 'sans-serif';
+}
+
+h1  {
+    font-family: "Rubik Scribble", system-ui;
+}
+h2  {
+    font-family: 'SpratVF';
+    font-stretch: 100%;
+    font-weight: 100%;
+    transition: font-weight 0.3s ease;
+}
+h2:hover   {
+    font-weight: 200;
+}
+main{
+
+    max-width: 100%;
+    margin-left: 300px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    padding: 2rem; 
+
+    border: 2px solid red;
+
+    /*border-width: 2px;
+    border-style: solid;
+    border-color: red;*/
+
+    box-sizing: border-box;
+}
+
+p {
+    font-size: 18px;
+    font-family: Verdana, sans-serif;
+}
+
+h2 {
+    color: rgb(3, 109, 135);
+}
+
+.highlighted {
+    background-color: aquamarine;
+    font-weight: bold;
+}
+
+h1 {color:rgb(3, 109, 135);
+
+}   
+nav {
+    padding: 1rem;
+    border-right: 1px dashed white; 
+    border-bottom: 1px dashed white;
+    box-sizing: border-box;
+    font-family: "Courier New", Courier, monospaces;
+    line-height: 1.5rem;
+
+    width: 400px;
+    position: fixed;
+    margin: 0;
+
+}
+.nagivation a {
+    color: darkmagenta;
+}
+
+.nagivation a:hover {
+    color: red;
+}
+h2 {
+    color: rgb(3, 109, 135);
+}
+h2 + p { 
+    text-indent: 2rem;
+}
+h3 + p { 
+    text-indent: 2rem;
+
+}
+img{
+    display: block;
+    max-width: 100%;
+    
+}

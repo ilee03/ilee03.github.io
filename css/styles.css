@@ -1,0 +1,89 @@
+body { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1 rem;
+}
+
+@keyframes tracking {
+    0% { 
+        letter-spacing: 0;
+        color: red;
+    }
+    50% {
+        color: green
+    }
+    100% {
+        letter-spacing: 10px;
+        color: blue
+    }  
+}
+h1  {
+    animation: tracking 2s eas infinite alternate;
+}
+
+header {
+    flex-basis: 75%;
+    flex-grow: 1;
+    border: 1px solid red;
+    padding: 2rem; 
+}
+main{
+    flex-basis: 100%;
+    flex-grow: 1;
+}
+
+section{
+    border: 1px solid blue;
+    padding: 2rem; 
+    display: flex;
+    flex-wrap: wrap;
+}
+h2{
+    flex-basis: 100%;
+}
+
+ol {
+    flex-basis: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}  
+
+li {
+    flex-basis: 50%;
+    background-color: rgb(255, 231, 172);
+    background: linear-gradient(90deg, rgba(2,0,36,1)0%, rgba(0,0,0)35% rgba(0,212,255,1)100%);
+    /*filter: blur(0)*/
+    box-shadow: 10px 10px 5px blue;
+
+    transition: all 1s ease;
+}
+li :hover{
+    background-color: cornflowerblue
+    color: white
+    filter: hue-rotate(180deg)
+    
+
+   /* transition: all 1s ease;*/
+}
+a {
+    display: block;
+    border: 1px solid green;
+    padding: 2rem;
+}
+
+section{
+    display: inline-block;
+    border: 1px solid green;
+    padding: 2rem; 
+    display: flex;
+    flex-wrap: wrap;
+
+}
+ol {
+    flex-basis: 100%;
+    list-style: none;
+
+}

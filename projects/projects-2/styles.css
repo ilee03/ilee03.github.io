@@ -1,0 +1,43 @@
+body {
+    background-color:peachpuff; 
+    max-width: 400px;
+    margin: auto;
+}
+main{
+
+    max-width: 100%;
+    margin-left: 300px;
+}
+
+.container {
+    max-width: 400px;
+    text-align: center;
+}
+.word-shape {
+    display: inline-block;
+    margin: 0 3px;
+    position: relative;
+}
+.shape {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+p {
+    font-size: 18px;
+    font-family: Verdana, sans-serif;
+}
+
+.square {
+    border-radius: 0;
+}
+
+.ellipse {
+    border-radius: 50%;
+    width: 40px;
+    height: 20px;
+}

@@ -1,10 +1,29 @@
 body {
-    background-color: rgb(255, 255, 255) max-width: 800px;
-    max-width: 100;
+    background-color:azure;
+    max-width: 1000px;
+    margin: auto;
+}
+main{
+
+    max-width: 100%;
+    margin-left: 300px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    padding: 2rem; 
+
+    border: 2px solid red;
+
+    /*border-width: 2px;
+    border-style: solid;
+    border-color: red;*/
+
+    box-sizing: border-box;
 }
 
 p {
-    width: 1000px;
     font-size: 18px;
     font-family: Verdana, sans-serif;
 }
@@ -16,4 +35,30 @@ h2 {
 .highlighted {
     background-color: aquamarine;
     font-weight: bold;
+}
+
+h1 {color:rgb(3, 109, 135);
+
+}   
+nav {
+    padding: 1rem;
+    border-right: 1px dashed darkmagenta; 
+    border-bottom: 1px dashed darkmagenta;
+    box-sizing: border-box;
+    font-family: "Courier New", Courier, monospaces;
+    line-height: 1.5rem;
+
+    width: 300px;
+    position: fixed;
+    margin: 0;
+
+}
+
+.navigation_link {
+    color: darkmagenta;
+}
+img{
+    display: block;
+    max-width: 100%;
+    
 }
