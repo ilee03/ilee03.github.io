@@ -18,7 +18,7 @@ body {
     }  
 }
 h1  {
-    animation: tracking 2s eas infinite alternate;
+    animation: tracking 2s ease infinite alternate;
 }
 
 header {
@@ -28,6 +28,8 @@ header {
     padding: 2rem; 
 }
 main{
+    display: flex;
+    flex-wrap: wrap;
     flex-basis: 100%;
     flex-grow: 1;
 }
@@ -37,6 +39,8 @@ section{
     padding: 2rem; 
     display: flex;
     flex-wrap: wrap;
+    flex-basis: 50%;
+    box-sizing: border-box;
 }
 h2{
     flex-basis: 100%;
@@ -76,8 +80,8 @@ a {
 
 section{
     display: inline-block;
-    border: 1px solid green;
-    padding: 2rem; 
+    /* border: 1px solid green; */
+    /* padding: 2rem;  */
     display: flex;
     flex-wrap: wrap;
 

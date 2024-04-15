@@ -1,0 +1,87 @@
+.stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: burlywood;
+  }
+  
+  .recipe-card {
+    display: flex; /* Added */
+    flex-wrap: wrap;
+    align-items: flex-start; /* Added */
+    width: 1000px;
+    height: auto; /* Changed to auto */
+    background-color: ivory;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 20px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    position: relative;
+    cursor: pointer; 
+    font-family: "Courier New", Courier;
+  }
+  
+  /* .recipe-card .textbox { 
+    width: 100%; /* Modified 
+    justify-content: flex-end; /* Align to the right 
+  } */
+  
+  .recipe-card .dashed-box {
+    border: 2px dashed #ccc;
+    padding: 20px; 
+    background-color: white;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    
+    flex-basis: 50%;
+  }
+
+  .main-info {
+    flex-basis: 50%;
+  }
+
+  .textbox {
+    flex-basis: 100%;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%; 
+    margin-bottom: 10px; 
+  }
+  #recipe2 img,
+  #recipe3 img,
+  #recipe4 img,
+  #recipe5 img {
+    max-width: 30%;
+  }
+  
+ 
+  h1 {
+    font-family: "Courier New", Courier, monospaces;
+    color: plum;
+    text-align: center;
+  }
+   
+  .recipe-card:not(:first-child) {
+    margin-top: -250px; 
+  }
+  
+  .recipe-card.active {
+    z-index: 999; /* Ensure it's on top */
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    transform: translate(-50%, -50%) scale(1.2); 
+  }
+  
+  .recipe-card:hover {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    transform: translateY(-200px); /* Lift the hovered card a little */
+  }
+  
+  .recipe-card img:hover {
+        filter: drop-shadow(8px 8px 8px #FFC0CB); 
+
+  }
+
+  
