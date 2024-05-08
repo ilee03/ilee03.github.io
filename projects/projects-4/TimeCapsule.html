@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centered Box</title>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .box {
+        width: 600px;
+        height: 400px;
+        background-color: white;
+        border: 4px solid #ccc;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .message {
+        font-size: 20px;
+        padding-left: 20px; /* Indent for the body */
+    }
+    .closing {
+        margin-left: 20px; /* Indent for the closing */
+    }
+</style>
+</head>
+<body>
+
+<div class="box"></div>
+
+<script>
+// Array of possible messages
+var messages = [
+    "Hello!",
+    "Welcome!",
+    "How are you?",
+    "Nice to meet you!",
+    "Have a great day!",
+    "Good morning!",
+    "Good afternoon!",
+    "Good evening!",
+    "What's up?",
+    "How's it going?",
+    "You're awesome!",
+    "Keep smiling!",
+    "Stay positive!",
+    "You got this!",
+    "Believe in yourself!",
+    "Never give up!",
+    "Follow your dreams!",
+    "Be kind!",
+    "Spread love!",
+    "Stay strong!",
+    // Add more messages as needed
+];
+
+// Array of possible ending phrases
+var endings = [
+    "Sincerely",
+    "Warm regards",
+    "Best wishes",
+    "With gratitude",
+    "Kind regards",
+    "Yours truly",
+    "Take care",
+    "Cheers",
+    // Add more ending phrases as needed
+];
+
+// Array of possible names
+var names = [
+    "John",
+    "Emily",
+    "Michael",
+    "Sophia",
+    "William",
+    "Isabella",
+    "James",
+    "Charlotte",
+    // Add more names as needed
+];
+
+var usedNames = []; // To keep track of used names
+var generatedMessages = []; // To store all generated messages
+var currentIndex = 0; // Index to keep track of the current message
+
+// Generate all messages and store them in the generatedMessages array
+generateMessages();
+
+document.addEventListener('click', function(event) {
+    // Display the current message
+    displayMessage();
+});
+
+// Function to generate all messages
+function generateMessages() {
+    for (var i = 0; i < messages.length; i++) {
+        var randomMessage = "Dear 2024,<br>" + messages[i] + "<br><span class='closing'>" + getRandomEnding() + ", " + getRandomName() + "</span>";
+        generatedMessages.push(randomMessage);
+    }
+}
+
+// Function to display the current message and advance to the next message
+function displayMessage() {
+    var newBox = document.querySelector('.box');
+    newBox.innerHTML = generatedMessages[currentIndex];
+    currentIndex = (currentIndex + 1) % generatedMessages.length; // Advance to the next message or wrap around
+}
+
+// Function to get a random ending phrase
+function getRandomEnding() {
+    return endings[Math.floor(Math.random() * endings.length)];
+}
+
+// Function to get a random name that hasn't been used yet
+function getRandomName() {
+    var randomName = names[Math.floor(Math.random() * names.length)];
+    // Check if the name has already been used
+    while (usedNames.includes(randomName)) {
+        randomName = names[Math.floor(Math.random() * names.length)];
+    }
+    usedNames.push(randomName); // Add the name to the usedNames array
+    return randomName;
+}
+</script>
+
+</body>
+</html>
