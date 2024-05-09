@@ -1,0 +1,58 @@
+@font-face {
+    font-family:'Courier New';
+    src: url('../fonts/Courier New.woff2');
+}
+
+.body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: <img src="images/bird-1.jpeg";
+    background-color: orange;
+    
+}
+
+.box {
+    width: 0;
+    height: 0;
+    background-color: white;
+    box-shadow:rgb(204, 219, 232) 4px 4px 7px 0px;
+    border: 2px solid #ccc;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-family: 'Courier New';
+    padding: 100px;
+    opacity: 0;
+    transition: all 1.5s ease;
+    perspective: 1000px;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1; /* Initially show the spinner */
+    transition: opacity 1s ease; /* Smooth fade transition */
+    animation: spin 2s linear 0s 3; /* Spin the spinner three times */
+}
+
+.spinner img {
+    width: 600px; /* Set width of the image */
+    height: 700px; /* Set height of the image */
+    border-radius: 50%; /* Ensure the image is circular */
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(720deg); } /* 3 spins (3 * 360deg) */
+}
+
+
