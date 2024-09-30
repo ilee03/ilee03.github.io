@@ -1,92 +1,90 @@
-/* This is how to comment in css */
+/* This is how to comment in CSS */
 /* -------------------
 colors
 ---------------------*/
-:root{
-    --bg-color :rgb(114, 33, 94);
+:root {
+    --bg-color: rgb(114, 33, 94);
     --text-color: white;
     --primary-color: rgb(245, 63, 229);
     --secondary-color: plum;
 }
 
-
-
 @font-face {
-    font-family:'Absans';
+    font-family: 'Absans';
     src: url('../fonts/Absans-Regular.woff2');
 }
 @font-face {
-    font-family:'SpratVF';
+    font-family: 'SpratVF';
     src: url('../fonts/SpratVF.woff2');
 }
+
 /* -------------------
 Base Styles
 ---------------------*/
 
 body {
-    background-color:var(--bg-color); 
+    background-color: var(--bg-color);
     color: var(--text-color);
-    /* max-width: 1000px; */
-    margin: auto;
+    margin:auto;
     font-family: 'Absans', 'sans-serif';
-
-    display:flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: flex; /* Ensure flexbox layout */
+    flex-wrap: nowrap; /* Keep navigation and content in a row */
+    gap: 20px; /* Space between navigation and content */
     align-items: flex-start;
 }
 
 body.light {
     background: lemonchiffon;
     color: darkolivegreen;
-
 }
+
 body.dark {
     background: rgb(4, 51, 51);
     color: lemonchiffon;
-
 }
 
-h1  {
+h1 {
     font-family: "Rubik Scribble", system-ui;
     font-size: 60px;
 }
-h2  {
+
+h2, h3 {
     font-family: 'SpratVF';
     font-stretch: 100%;
     font-weight: 100%;
     transition: font-weight 0.3s ease;
-    color: var(--secondary-color)
-}
-h3  {
-    font-family: 'SpratVF';
-    font-stretch: 100%;
-    font-weight: 100%;
-    transition: font-weight 0.3s ease;
-    color: var(--primary-color)
-
 }
 
-h2:hover   {
+h2 {
+    color: rgb(3, 109, 135); /* Merged this with the below rule */
+}
+h2:hover {
     font-weight: 200;
 }
-main{
+
+h3 {
+    color: var(--primary-color);
+}
+
+h2 + p, h3 + p {
+    text-indent: 2rem;
+}
+
+main {
+    flex-grow: 1; /* This allows the main content to take up the remaining space */
     max-width: 100%;
 }
 
 img {
     display: block;
     max-width: 100%;
-    padding: 2rem; 
-
+    padding: 2rem;
     border: 2px solid var(--secondary-color);
-
-
     box-sizing: border-box;
 }
 
-a { 
-    var(--text-color);
+a {
+    color: var(--text-color); /* Corrected the color rule */
 }
 
 p {
@@ -94,10 +92,6 @@ p {
     font-family: Verdana, sans-serif;
 }
 
-h2 {
-    color: yellowgreen;
-    var(--secondary-color);
-}
 h4 {
     color: palegreen;
 }
@@ -107,107 +101,62 @@ h4 {
     font-weight: bold;
 }
 
-
 .navigation {
-    /* padding: 1rem; */
     box-sizing: border-box;
-    font-family: "Courier New", Courier, monospaces;
+    font-family: "Courier New", Courier, monospace;
     line-height: 1.2rem;
-    width: 18rem;
-    margin: 0;
+    width: 500rem;
     display: none;
+    position: sticky;
+    margin-top: 10rem; /* Adjusted to be lower than buttons */
+    margin-left: 0%;
 }
 
-
-.navigation ol  {
+.navigation ol {
     list-style: none;
 }
-
 
 .navigation a {
     color: yellowgreen;
 }
+
 .navigation li {
-    border-bottom: 1px solid plum;
-    
+    border-bottom: px solid plum;
 }
+
 .navigation a:hover {
     color: rgb(235, 82, 222);
 }
 
-h1 {};
-
-h2 {
-    color: rgb(3, 109, 135);
-}
-h2 + p { 
-    text-indent: 2rem;
-}
-h3 + p { 
-    text-indent: 2rem;
-
-}
-img{
-    display: block;
-    max-width: 100%;
-    
-}
-
-    
 /* 
 -----------------------
 Media Queries 
 -----------------------
 */
-/* small screens */
-.navigation {
-    display:none;
-}
-@media screen and (min-width: 30rem){
+@media screen and (min-width: 30rem) {
     .navigation {
-       display: block;
-    }
-}
-/* medium screens */
-@media screen and (min-width: 500px){
-    .navigation{
-        display:block;
-        order: 2;
-    }
-
-    main {
-        order: 1;
+        display: block;
     }
 }
 
-/* Large screens */
-/* @media screen and (min-width: 1000px){
-    .navigation{
-        order: 1;
-        flex-basis: 300px;
-
-        position: sticky;
-        top: 50px;
+@media screen and (min-width: 500px) {
+    .navigation {
+        display: block;
+        order: 1; /* Ensures navigation is on the left */
     }
-
     main {
-        order: 2;
-        flex-basis: calc(100% - 800px - 20px);
+        order: 2; /* Ensures main content is next to navigation */
     }
-} */
-/* Large screens */
-@media screen and (min-width: 60rem){
-    .navigation{
-        order: 1;
-        flex-basis: 18rem;
+}
 
+@media screen and (min-width: 60rem) {
+    .navigation {
+        flex-basis: 18rem; /* Defines the width of the sidebar */
         position: sticky;
-        top: 1rem;
+        top: 5rem; /* Adjusted to be lower than buttons */
     }
-
     main {
-        order: 2;
-        flex-basis: calc(100% - 18rem - 2rem);
+        flex-grow: 1; /* The main content will take the remaining space */
         align-items: flex-start;
     }
 }
