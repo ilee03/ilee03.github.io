@@ -173,59 +173,84 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function authenticate() {
+        return gapi.auth2.getAuthInstance()
+            .signIn({ 
+                scope: "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly" 
+            })
+            .then(() => console.log("Sign-in successful"))
+            .catch(err => console.error("Error signing in", err));
+    }
+    
+    function loadGmailApi() {
+        return gapi.client.load('gmail', 'v1');
+    }
+    
+    function sendEmail(emailContent) {
+        var email = [
+            `From: "Me" <izzy9003@gmail.com>`,
+            `To: ${emailContent.to}`,
+            `Subject: ${emailContent.subject}`,
+            "",
+            emailContent.message,
+            `Attached Image: ${emailContent.image}`
+        ].join("\r\n").trim();
+    
+        var base64EncodedEmail = btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    
+        return gapi.client.gmail.users.messages.send({
+            userId: 'me',
+            resource: {
+                raw: base64EncodedEmail
+            }
+        }).then(() => {
+            alert("Memories stored successfully!");
+        }).catch(err => console.error("Error sending email", err));
+    }
+    
     function storeMemories() {
         var lastCard = generatedCards[generatedCards.length - 1];
         var message = lastCard.querySelector('.front').innerHTML;
         var backImageSrc = lastCard.querySelector('.back-image').src;
     
-   
+        var emailContent = {
+            'to': 'izzy9003@gmail.com',
+            'subject': '2024 Time Capsule',
+            'message': message,
+            'image': backImageSrc
+        };
     
         authenticate()
-            .then(() => storeMemories());
+            .then(() => loadGmailApi())
+            .then(() => sendEmail(emailContent));
+    }
+    
 
+    function sendEmail(emailContent) {
+        var email = [
+            `From: "Me" <izzy9003@gmail.com>`,
+            `To: ${emailContent.to}`,
+            `Subject: ${emailContent.subject}`,
+            "",
+            emailContent.message,
+            `Attached Image: ${emailContent.image}`
+        ].join("\r\n").trim();
+
+        var base64EncodedEmail = btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+        gapi.client.gmail.users.messages.send({
+            userId: 'me',
+            resource: {
+                raw: base64EncodedEmail
+            }
+        }).then(() => {
+            alert("Memories stored successfully!");
+        }).catch(err => console.error("Error sending email", err));
     }
 
     storeMemoriesButton.addEventListener('click', storeMemories);
 
-    // Add this new function to set up the grid format for the cards
-function displayCardsInGrid() {
-    // Create a container for the grid if it doesn't exist already
-    let gridContainer = document.getElementById('grid-container');
-    if (!gridContainer) {
-        gridContainer = document.createElement('div');
-        gridContainer.id = 'grid-container';
-        gridContainer.style.display = 'grid';
-        gridContainer.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
-        gridContainer.style.gap = '20px';
-        gridContainer.style.padding = '20px';
-        gridContainer.style.position = 'absolute';
-        gridContainer.style.top = '50%';
-        gridContainer.style.left = '50%';
-        gridContainer.style.transform = 'translate(-50%, -50%)';
-        gridContainer.style.backgroundColor = 'ghostwhite';
-        gridContainer.style.zIndex = '1000';
-        gridContainer.style.border = '2px solid #ccc';
-        gridContainer.style.boxShadow = 'rgba(204, 219, 232, 0.5) 0px 8px 16px';
-        document.body.appendChild(gridContainer);
-    }
-
-    // Move all generated cards into the grid container
-    generatedCards.forEach(card => {
-        card.style.position = 'static'; // Reset position for grid layout
-        card.style.margin = 'auto'; // Center card in the grid cell
-        gridContainer.appendChild(card);
+    gapi.load("client:auth2", function () {
+        gapi.auth2.init({ client_id: "206359481247-8mui60rk1q0cuf7kqu0uhshtq9gk00s1.apps.googleusercontent.com" });
     });
-
-    // Hide the scatter button and show only the grid
-    scatterButton.style.display = 'none';
-    storeMemoriesButton.style.display = 'none';
-}
-
-// Update the storeMemories function to call displayCardsInGrid
-function storeMemories() {
-    displayCardsInGrid();
-}
-
-storeMemoriesButton.addEventListener('click', storeMemories);
-
 });

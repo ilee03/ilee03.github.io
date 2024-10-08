@@ -120,17 +120,6 @@ body, html {
     cursor: pointer;
     z-index: 9999;
 }
-#grid-container {
-    background-color: ghostwhite;
-    border: 2px solid #ccc;
-    box-shadow: rgba(204, 219, 232, 0.5) 0px 8px 16px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-
 
 
  
