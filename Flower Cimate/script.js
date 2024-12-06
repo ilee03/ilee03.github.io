@@ -2,31 +2,24 @@ const flowerField = document.getElementById('flower-field');
 const tempValue = document.getElementById('temp-value');
 const windspeedValue = document.getElementById('windspeed-value');
 
-let selectedCountry = ''; // Global variable to store the selected country name
+// Starting page transition
+document.getElementById('start-btn').addEventListener('click', () => {
+  const splashScreen = document.getElementById('splash-screen');
+  const mainContent = document.getElementById('main-content');
 
-// Function to update the selected country in the top box and tooltip
-function updateCountryName(countryName) {
-  selectedCountry = countryName; // Store the country name globally
-  const countryNameElement = document.getElementById('country-name');
-  countryNameElement.innerText = `Selected Country: ${countryName}`;
-}
+  // Hide splash screen and show main content with smooth transition
+  splashScreen.style.display = 'none';
+  mainContent.style.display = 'block';
 
-// Function to generate flowers and update the country in the tooltip
-async function updateVisualization(latitude, longitude, countryName) {
-  const data = await fetchWeatherData(latitude, longitude);
+  // Fade in main content after it is shown
+  setTimeout(() => {
+    mainContent.style.opacity = 1;
+  }, 100);
+});
 
-  // Update the temperature and wind speed on the page
-  tempValue.innerText = data.temp.toFixed(1);
-  windspeedValue.innerText = data.windSpeed.toFixed(1);
+// Your original functionality code
 
-  // Update the country name in the top box and tooltip
-  updateCountryName(countryName);
-
-  // Generate flowers based on the fetched data
-  generateFlowers(data, countryName);
-}
-
-// Create flower with tooltip to include country
+// Create flower with tooltip to exclude country name
 function createFlower(x, y, size, climateData, countryName) {
   const flower = document.createElement('div');
   flower.classList.add('flower');
@@ -40,13 +33,13 @@ function createFlower(x, y, size, climateData, countryName) {
     ${randomColor()} 60%, 
     transparent 100%)`; // Dynamic colors for flowers
 
-  // Add hover events for tooltip with country name
+  // Add hover events for tooltip excluding the country name
   flower.addEventListener('mouseover', (e) => {
     const tooltip = document.getElementById('tooltip');
     tooltip.style.display = 'block';
     tooltip.style.left = `${e.pageX + 10}px`;
     tooltip.style.top = `${e.pageY + 10}px`;
-    tooltip.innerText = `Country: ${countryName}\nTemperature: ${climateData.temp.toFixed(1)}°F\nWind Speed: ${climateData.windSpeed.toFixed(1)} mph`;
+    tooltip.innerText = `Temperature: ${climateData.temp.toFixed(1)}°F\nWind Speed: ${climateData.windSpeed.toFixed(1)} mph`;
   });
 
   flower.addEventListener('mouseout', () => {
@@ -56,6 +49,7 @@ function createFlower(x, y, size, climateData, countryName) {
 
   flowerField.appendChild(flower);
 }
+
 
 // Function to generate flowers with correct position and tooltip data
 function generateFlowers(climateData, countryName) {
@@ -441,4 +435,56 @@ document.getElementById('location-madrid').addEventListener('click', () => {
 
 document.getElementById('location-nairobi').addEventListener('click', () => {
   updateVisualization(-1.286389, 36.817223); // Nairobi, Kenya coordinates
+});
+
+
+
+
+// Capture button event listener
+document.getElementById('capture-button').addEventListener('click', () => {
+  captureAndCreateArt();
+});
+
+// Function to capture and apply art effect
+function captureAndCreateArt() {
+  const flowerField = document.getElementById('flower-field');
+  
+  // Use html2canvas to capture just the flower field
+  html2canvas(flowerField).then(canvas => {
+    // Apply a filter to turn the captured image into art
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+    // Apply a filter to create an art effect (e.g., invert colors for an artistic look)
+    applyArtEffect(imageData, ctx);
+
+    // Show the art canvas on the page or save it as an image
+    document.body.appendChild(canvas); // Append the canvas to the body or use it elsewhere
+
+    // Optionally, allow saving the image
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL(); // Image as base64
+    link.download = 'flower-art.png'; // Set the download file name
+    link.click(); // Trigger download
+  });
+}
+
+// Function to apply an art effect to the captured image (e.g., invert colors)
+function applyArtEffect(imageData, ctx) {
+  const data = imageData.data;
+
+  // Example: Invert colors for an art effect
+  for (let i = 0; i < data.length; i += 4) {
+    data[i] = 255 - data[i]; // Red
+    data[i + 1] = 255 - data[i + 1]; // Green
+    data[i + 2] = 255 - data[i + 2]; // Blue
+    // Alpha (data[i + 3]) is left unchanged
+  }
+
+  // Put the modified image data back onto the canvas
+  ctx.putImageData(imageData, 0, 0);
+}
+// Capture button event listener
+document.getElementById('capture-button').addEventListener('click', () => {
+  captureAndCreateArt();
 });

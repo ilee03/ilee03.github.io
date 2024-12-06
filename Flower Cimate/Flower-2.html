@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Flower Generator</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .control {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="flowerCanvas" width="800" height="800"></canvas>
+    <div class="controls">
+        <div class="control">
+            <label>Frequency: <span id="frequencyValue">2.0</span></label>
+            <input type="range" id="frequencySlider" min="0" max="10" step="0.1" value="2.0">
+        </div>
+        <div class="control">
+            <label>Magnitude: <span id="magnitudeValue">0.5</span></label>
+            <input type="range" id="magnitudeSlider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+        <div class="control">
+            <label>Independence: <span id="independenceValue">0.1</span></label>
+            <input type="range" id="independenceSlider" min="0" max="1" step="0.01" value="0.1">
+        </div>
+        <div class="control">
+            <label>Spacing: <span id="spacingValue">0.01</span></label>
+            <input type="range" id="spacingSlider" min="0.01" max="0.2" step="0.01" value="0.01">
+        </div>
+        <a href="index.html">Back to Main Page</a>
+
+    </div>
+    <script>
+        // Function to draw a single deformed circle
+        function drawDeformedCircle(ctx, circle, frequency, magnitude, seed) {
+            const steps = 100; // Number of points in the circle
+            const angleStep = (Math.PI * 2) / steps;
+            ctx.beginPath();
+
+            for (let i = 0; i <= steps; i++) {
+                const angle = i * angleStep;
+                const deformation = Math.sin(angle * frequency + seed) * magnitude * circle.radius;
+                const r = circle.radius + deformation;
+
+                const x = circle.x + r * Math.cos(angle);
+                const y = circle.y + r * Math.sin(angle);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        // Function to draw the flower with stacked circles
+        function drawFlower(ctx, circle, frequency, magnitude, independence, spacing, count = 200) {
+            let current = { ...circle };
+            current.radius /= (magnitude + 1);
+
+            for (let i = 0; i < count; i++) {
+                drawDeformedCircle(ctx, current, frequency, magnitude, i * independence);
+                current.radius *= (1 - spacing); // Reduce the radius for the next circle
+            }
+        }
+
+        // Main setup
+        const canvas = document.getElementById('flowerCanvas');
+        const ctx = canvas.getContext('2d');
+        const center = { x: canvas.width / 2, y: canvas.height / 2, radius: 300 };
+
+        // Default parameters
+        let frequency = 2.0;
+        let magnitude = 0.5;
+        let independence = 0.1;
+        let spacing = 0.01;
+
+        // Update the flower
+        function updateFlower() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'pink';
+            drawFlower(ctx, center, frequency, magnitude, independence, spacing);
+        }
+
+        // Slider controls
+        const frequencySlider = document.getElementById('frequencySlider');
+        const magnitudeSlider = document.getElementById('magnitudeSlider');
+        const independenceSlider = document.getElementById('independenceSlider');
+        const spacingSlider = document.getElementById('spacingSlider');
+
+        // Display values
+        const frequencyValue = document.getElementById('frequencyValue');
+        const magnitudeValue = document.getElementById('magnitudeValue');
+        const independenceValue = document.getElementById('independenceValue');
+        const spacingValue = document.getElementById('spacingValue');
+
+        // Event listeners for sliders
+        frequencySlider.addEventListener('input', (e) => {
+            frequency = parseFloat(e.target.value);
+            frequencyValue.textContent = frequency.toFixed(2);
+            updateFlower();
+        });
+
+        magnitudeSlider.addEventListener('input', (e) => {
+            magnitude = parseFloat(e.target.value);
+            magnitudeValue.textContent = magnitude.toFixed(2);
+            updateFlower();
+        });
+
+        independenceSlider.addEventListener('input', (e) => {
+            independence = parseFloat(e.target.value);
+            independenceValue.textContent = independence.toFixed(2);
+            updateFlower();
+        });
+
+        spacingSlider.addEventListener('input', (e) => {
+            spacing = parseFloat(e.target.value);
+            spacingValue.textContent = spacing.toFixed(2);
+            updateFlower();
+        });
+
+        // Initial render
+        updateFlower();
+    </script>
+</body>
+</html>
