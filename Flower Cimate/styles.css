@@ -41,7 +41,7 @@ body {
     padding: 0;
     overflow: hidden;
     background: linear-gradient(to top, #87CEEB, #FFFFFF);
-    font-family: 'Arial', sans-serif;
+    font-family: 'courier','Arial', sans-serif;
   }
   
   #flower-field {
