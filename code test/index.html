@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flower Climate Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<br><br><br><br><br><br><br>
+
+
+<div id="data-display">
+  <h1>Climate Data Visualizer</h1>
+  <p id="climate-info">Fetching climate data...</p>
+  <div id="climate-info">
+    <p>Temperature: <span id="temp-value"></span>°F</p>
+    <p>Wind Speed: <span id="windspeed-value"></span> mph</p>
+    <br>
+    <div id="climate-info">
+      <div id="country-name">Selected Country: </div>
+    </div>    
+  </div>
+<div>
+  <!-- Existing locations -->
+  <button id="location-berlin" class="location-btn">Berlin, Germany</button>
+  <button id="location-nyc" class="location-btn">New York, USA</button>
+  <button id="location-la" class="location-btn">Los Angeles, USA</button>
+  <button id="location-london" class="location-btn">London, UK</button>
+  <button id="location-ri" class="location-btn">Rhode Island, USA</button>
+  <button id="location-tokyo" class="location-btn">Tokyo, Japan</button>
+  <button id="location-zurich" class="location-btn">Zurich, Switzerland</button>
+  <button id="location-virginia" class="location-btn">Virginia, USA</button>
+  
+  <!-- New locations -->
+  <button id="location-sydney" class="location-btn">Sydney, Australia</button>
+  <button id="location-mumbai" class="location-btn">Mumbai, India</button>
+  <button id="location-cape-town" class="location-btn">Cape Town, South Africa</button>
+  <button id="location-paris" class="location-btn">Paris, France</button>
+  <button id="location-buenos-aires" class="location-btn">Buenos Aires, Argentina</button>
+  <button id="location-beijing" class="location-btn">Beijing, China</button>
+  <button id="location-moscow" class="location-btn">Moscow, Russia</button>
+  <button id="location-cairo" class="location-btn">Cairo, Egypt</button>
+  <button id="location-mexico-city" class="location-btn">Mexico City, Mexico</button>
+  <button id="location-rome" class="location-btn">Rome, Italy</button>
+
+  <!-- Additional USA Locations -->
+    <button id="location-chicago" class="location-btn">Chicago, USA</button>
+    <button id="location-seattle" class="location-btn">Seattle, USA</button>
+    <button id="location-dallas" class="location-btn">Dallas, USA</button>
+    <button id="location-miami" class="location-btn">Miami, USA</button>
+    
+    <!-- Additional International Locations -->
+    <button id="location-seoul" class="location-btn">Seoul, South Korea</button>
+    <button id="location-singapore" class="location-btn">Singapore</button>
+    <button id="location-madrid" class="location-btn">Madrid, Spain</button>
+    <button id="location-nairobi" class="location-btn">Nairobi, Kenya</button>  
+</div>
+
+<div id="flower-field"></div>
+  </div>
+  <script src="script.js"></script>
+  <div id="tooltip"></div>
+  <div id="tooltip" style="display:none; position: absolute;"></div>
+
+</body>
+</html>
