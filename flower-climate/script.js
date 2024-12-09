@@ -51,25 +51,26 @@ function createFlower(x, y, size, climateData, countryName) {
 }
 
 
-// Function to generate flowers with correct position and tooltip data
 function generateFlowers(climateData, countryName) {
   flowerField.innerHTML = ''; // Clear existing flowers
 
   const flowerCount = 100;
-  const maxTemp = 100; // max temperature for scaling
-  const minTemp = 30; // min temperature for scaling
+  const maxTemp = 100; // Maximum temperature for scaling
+  const minTemp = 30; // Minimum temperature for scaling
 
   for (let i = 0; i < flowerCount; i++) {
-    const size = Math.random() * 30 + 10;
+    // Increase the base size and random range for flowers
+    const size = Math.random() * 60 + 30; // Random size between 30 and 80px
 
-    // Calculate position based on temperature, with higher temperature influencing vertical position
+    // Calculate position based on temperature
     const tempFactor = (climateData.temp - minTemp) / (maxTemp - minTemp); // Normalize temperature between 0 and 1
-    const y = Math.random() * (window.innerHeight - 100) + 100; // Start slightly below offsetTop
-    const x = Math.random() * window.innerWidth; // Random x position across the screen
+    const y = Math.random() * (window.innerHeight - 100) + 100; // Random y position
+    const x = Math.random() * window.innerWidth; // Random x position
 
-    createFlower(x, y, size, climateData, countryName); // Pass the countryName here
+    createFlower(x, y, size, climateData, countryName); // Create flower with new size
   }
 }
+
 // Select all location buttons
 const locationButtons = document.querySelectorAll('.location-btn');
 
@@ -159,25 +160,6 @@ function updateVisualization(latitude, longitude, countryName) {
   updateCountryName(countryName); // Update the country name on the tooltip and the info box
   generateFlowers(data, countryName); // Generate flowers based on data (optional visual element)
 }
-
-// Function to generate flowers based on climate data (for visual effect)
-function generateFlowers(climateData, countryName) {
-  flowerField.innerHTML = ''; // Clear existing flowers
-
-  const flowerCount = 100;
-  const maxTemp = 100;
-  const minTemp = 30;
-
-  for (let i = 0; i < flowerCount; i++) {
-    const size = Math.random() * 30 + 10;
-    const tempFactor = (climateData.temp - minTemp) / (maxTemp - minTemp);
-    const y = Math.random() * (window.innerHeight - 100) + 100;
-    const x = Math.random() * window.innerWidth;
-
-    createFlower(x, y, size, climateData, countryName);
-  }
-}
-
 
 // Helper function to generate random colors
 function randomColor() {
@@ -290,7 +272,7 @@ async function generateFlowers(climateData) {
   const sectionsToCover = numSections === 1 ? [1] : Array.from({ length: numSections }, (_, i) => i + 1);
 
   for (let i = 0; i < flowerCount; i++) {
-    const size = Math.random() * 30 + 10;
+    const size = Math.random() * 60 + 10;
 
     // Randomly choose a section within the range of covered sections
     const section = sectionsToCover[Math.floor(Math.random() * sectionsToCover.length)];

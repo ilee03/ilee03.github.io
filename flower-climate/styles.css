@@ -55,8 +55,8 @@ body {
 
   .flower {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 80px;
+    height: 80px;
     background: radial-gradient(circle, #FF69B4, #FF1493);
     border-radius: 50%;
     transform-origin: center bottom;
